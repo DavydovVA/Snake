@@ -21,7 +21,7 @@ public:
 
 	bool move(Field&, int*, Settings);
 
-	bool how_to_move(int*, char, Field&, int*);
+	bool how_to_move(int*, char, Field&, int*, Settings);
 	void move_free(int*);
 	void move_eat_apple(int*);
 
@@ -98,25 +98,25 @@ bool Snake::move(Field& F, int* shape, Settings set) {
 			head[0] = shape[0] - 2;
 			char cell = field[head[0]][head[1]];
 
-			temp = how_to_move(head, cell, F, tail);
+			temp = how_to_move(head, cell, F, tail, set);
 		}
 		else if (head[0] == shape[0] - 1) {
 			head[0] = 1;
 			char cell = field[head[0]][head[1]];
 
-			temp = how_to_move(head, cell, F, tail);
+			temp = how_to_move(head, cell, F, tail, set);
 		}
 		else if (head[1] == 0) {
 			head[1] = shape[1] - 2;
 			char cell = field[head[0]][head[1]];
 
-			temp = how_to_move(head, cell, F, tail);
+			temp = how_to_move(head, cell, F, tail, set);
 		}
 		else if (head[1] == shape[1] - 1) {
 			head[1] = 1;
 			char cell = field[head[0]][head[1]];
 
-			temp = how_to_move(head, cell, F, tail);
+			temp = how_to_move(head, cell, F, tail, set);
 		}
 		return temp;
 	}
@@ -137,19 +137,19 @@ bool Snake::move(Field& F, int* shape, Settings set) {
 	return true;
 }
 
-bool Snake::how_to_move(int* head, char cell, Field& F, int* tail) {
-	if (cell == ' ') {
+bool Snake::how_to_move(int* head, char cell, Field& F, int* tail, Settings set) {
+	if (cell == set.free_space) {
 		move_free(head);
 		return true;
 	}
-	else if (cell == '7') {
+	else if (cell == set.snakes_body) {
 		if (head[0] == tail[0] && head[1] == tail[1]) {
 			move_free(head);
 			return true;
 		}
 		return false;
 	}
-	else if (cell == '1') {
+	else if (cell == set.apple) {
 		F.eat_apple();
 		move_eat_apple(head);
 		return true;
