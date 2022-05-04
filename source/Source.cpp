@@ -2,7 +2,8 @@
 #include<stdio.h>
 #include <thread>
 
-#ifdef WINDOWS
+#ifdef WIN32
+ #include <conio.h>
  #include <Windows.h>
 #else
  #include <unistd.h>
@@ -17,7 +18,7 @@
 #include "Snake.h"
 
 // Definition of keyboard arrows
-#ifdef WINDOWS
+#ifdef WIN32
 	#define UP 72
 	#define DOWN 80
 	#define LEFT 75
@@ -32,7 +33,7 @@
 
 // Clear screen function
 void clearScreen() {
-#ifdef WINDOWS
+#ifdef WIN32
 	std::system("cls");
 #else
 	std::system ("clear");
@@ -40,7 +41,7 @@ void clearScreen() {
 }
 
 
-#ifndef WINDOWS
+#ifndef WIN32
 // Imitation of _getch() from Windows
 int _getch() {
     /*int ch;
@@ -117,8 +118,8 @@ void RunGame(Settings& set, Field& F, Snake& S, bool& game) {
 	while (game == true) {
 		F.draw_frame(S.get_snake(), S.get_len(), set);
 
-#ifdef WINDOWS
-		Seep(set.delay);
+#ifdef WIN32
+		Sleep(set.delay);
 #else
 		std::this_thread::sleep_for(std::chrono::milliseconds(set.delay));
 #endif
@@ -161,11 +162,11 @@ int main() {
 	Field F(shape);
 	
 	auto t1 = std::thread(RunGame, std::ref(set),
-														 std::ref(F),
-														 std::ref(S),
-														 std::ref(game));
+					std::ref(F),
+					std::ref(S),
+					std::ref(game));
 	auto t2 = std::thread(RunKeyBoard, std::ref(S),
-															   std::ref(game));
+					std::ref(game));
 	
 	t1.join();
 	t2.join();
