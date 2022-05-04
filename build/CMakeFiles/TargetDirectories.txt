@@ -1,0 +1,7 @@
+/home/volerej/Git/Snake/build/CMakeFiles/Snake.dir
+/home/volerej/Git/Snake/build/CMakeFiles/edit_cache.dir
+/home/volerej/Git/Snake/build/CMakeFiles/rebuild_cache.dir
+/home/volerej/Git/Snake/build/CMakeFiles/list_install_components.dir
+/home/volerej/Git/Snake/build/CMakeFiles/install.dir
+/home/volerej/Git/Snake/build/CMakeFiles/install/local.dir
+/home/volerej/Git/Snake/build/CMakeFiles/install/strip.dir
