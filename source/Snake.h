@@ -1,5 +1,5 @@
 #include <iostream>
-#include <conio.h>
+//#include <conio.h>
 #include <cmath>
 using namespace std;
 
@@ -19,7 +19,7 @@ public:
 	int* get_coord(int);
 	int** get_snake();
 
-	bool move(Field&, int*, Settings);
+	bool move(Field&, Settings);
 
 	bool how_to_move(int*, char, Field&, int*, Settings);
 	void move_free(int*);
@@ -67,7 +67,7 @@ void Snake::resize() {
 
 }
 
-bool Snake::move(Field& F, int* shape, Settings set) {
+bool Snake::move(Field& F, Settings set) {
 	int head[2] = { get_coord_head()[0], get_coord_head()[1] };
 	int tail[2] = { get_coord_tail()[0], get_coord_tail()[1] };
 	bool temp = true;
@@ -95,24 +95,24 @@ bool Snake::move(Field& F, int* shape, Settings set) {
 	}
 	else if (cell == set.borders) {
 		if (head[0] == 0) {
-			head[0] = shape[0] - 2;
+			head[0] = set.rows - 2;
 			char cell = field[head[0]][head[1]];
 
 			temp = how_to_move(head, cell, F, tail, set);
 		}
-		else if (head[0] == shape[0] - 1) {
+		else if (head[0] == set.rows - 1) {
 			head[0] = 1;
 			char cell = field[head[0]][head[1]];
 
 			temp = how_to_move(head, cell, F, tail, set);
 		}
 		else if (head[1] == 0) {
-			head[1] = shape[1] - 2;
+			head[1] = set.cols - 2;
 			char cell = field[head[0]][head[1]];
 
 			temp = how_to_move(head, cell, F, tail, set);
 		}
-		else if (head[1] == shape[1] - 1) {
+		else if (head[1] == set.cols - 1) {
 			head[1] = 1;
 			char cell = field[head[0]][head[1]];
 
@@ -154,6 +154,8 @@ bool Snake::how_to_move(int* head, char cell, Field& F, int* tail, Settings set)
 		move_eat_apple(head);
 		return true;
 	}
+	
+	return false;
 }
 
 void Snake::move_free(int* head) {
