@@ -1,1 +1,0 @@
-/home/volerej/Snake/bin/Snake
