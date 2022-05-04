@@ -15,7 +15,7 @@ set(CMAKE_INSTALL_PATH "$ORIGIN/../lib")
 add_executable(Snake Source.cpp)
 
 target_include_directories(Snake PUBLIC
-												"$(PROJECT_BINARY_DIR)"
-												)
+                                                "$(PROJECT_BINARY_DIR)"
+                                               )
 
 install(TARGETS Snake DESTINATION bin)
